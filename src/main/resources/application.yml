@@ -1,0 +1,66 @@
+server:
+  servlet:
+    context-path: /
+  port: 8081
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 20MB
+
+  application:
+    name: test
+  profiles:
+    active: @spring.profiles.active@
+  datasource:
+    url: jdbc:mysql://cxxm-db.dev.test.jiedaibao.com:3307/taxplan?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull
+    username: rd_rw
+    password: vM7Ye2E7NRehw==
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      pool-name: TaxPlanHikari
+      auto-commit: true
+      minimum-idle: 5
+      maximum-pool-size: 10
+      idle-timeout: 300000
+      max-lifetime: 600000
+      connection-timeout: 5000
+      validation-timeout: 5000
+      connection-test-query: SELECT 1
+      transaction-isolation: TRANSACTION_REPEATABLE_READ
+  redis:
+    port: 6379
+    host: localhost
+    jedis:
+      pool:
+        max-idle: 5
+        max-active: 5
+        min-idle: 5
+        max-wait: 5
+    lettuce:
+      pool:
+        max-active: 5
+        max-idle: 5
+        min-idle: 2
+    password:
+
+
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  type-aliases-package:
+  configuration:
+    cache-enabled: false
+    default-executor-type: REUSE
+    map-underscore-to-camel-case: true
+
+logging:
+  config: classpath:logback/logback-@spring.profiles.active@.xml
+  level:
+    ROOT: INFO
+  path: /data/logs/test
+
+application:
+  exclude-request-urls: [
+
+  ]
