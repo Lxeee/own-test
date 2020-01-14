@@ -1,22 +1,30 @@
 package RedisTest;
 
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import redis.clients.jedis.BinaryClient;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 /**
- * @author tengfei
+ * @author
  * @version 1.0
- * @date 2018/7/13 下午4:15
+ * @date
  */
 public class RedisUtil {
-    private JedisPool pool = null;
+    private static JedisPool pool = null;
+    private static final Logger log = LoggerFactory.getLogger(RedisUtil.class);
+    private static String REDIS_KEY = "redis_lock";
+
+
 
     @Value("spring.redis.host")
     private String host;
@@ -56,6 +64,159 @@ public class RedisUtil {
         }
     }
 
+
+    private static final Long RELEASE_SUCCESS = 1L;
+
+    private static final String LOCK_SUCCESS = "OK";
+    private static final String SET_IF_NOT_EXIST = "NX";
+    private static final String SET_WITH_EXPIRE_TIME = "PX";
+
+    /**
+     * 尝试获取分布式锁
+     * @param lockKey 锁
+     * @param requestId 请求标识
+     * @param expireTime 超期时间
+     * @return 是否获取成功
+     */
+    public static boolean tryGetDistributedLock( String lockKey, String requestId, int expireTime) {
+        Jedis jedis = getJedis();
+        lockKey = makeKey(lockKey);
+        String result = jedis.set(lockKey, requestId, SET_IF_NOT_EXIST, SET_WITH_EXPIRE_TIME, expireTime);
+
+        if (LOCK_SUCCESS.equals(result)) {
+            log.info("加锁成功，lockkey：{}", lockKey);
+            return true;
+        }
+        log.info("加锁失败，lockkey：{}", lockKey);
+        return false;
+
+    }
+
+    /**
+     * 释放分布式锁
+     * @param lockKey 锁
+     * @param requestId 请求标识
+     * @return 是否释放成功
+     */
+    public static boolean releaseDistributedLock(String lockKey, String requestId) {
+        Jedis jedis = getJedis();
+        lockKey = makeKey(lockKey);
+        String script = "if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end";
+        Object result = jedis.eval(script, Collections.singletonList(lockKey), Collections.singletonList(requestId));
+
+        if (RELEASE_SUCCESS.equals(result)) {
+            log.info("释放锁成功，lockkey：{}", lockKey);
+            return true;
+        }
+        log.info("释放锁失败，lockkey：{}", lockKey);
+        return false;
+
+    }
+
+
+    /**
+     * 由Redis保证的CAS操作
+     */
+    public static boolean compareAndSet(String lockKey, String stringKey, String oldValue, String newValue) throws Exception {
+        if (StringUtils.isEmpty(lockKey) || StringUtils.isEmpty(stringKey)) {
+            return false;
+        }
+        boolean ret = false;
+        long lock = plusOne(lockKey);
+        if (1 == lock) {
+            String oldValueInRedis = getStr(stringKey);
+            if ((null == oldValueInRedis && null == oldValue) || (null != oldValue && oldValue.equals(oldValueInRedis))) {
+                set(stringKey, newValue);
+                ret = true;
+            }
+        }
+        minusOne(lockKey);
+        return ret;
+    }
+
+    /**
+     * 由Redis保证的原子加操作
+     */
+    public static long plus(String key, long value) throws Exception {
+        // Preconditions.checkArgument(StringUtils.isNotBlank(key), "key can not be null");
+
+        if (value < 0) {
+            return minus(key, Math.abs(value));
+        }
+
+        Jedis jedis = getJedis();
+        try {
+            String redisKey = makeKey(key);
+            return jedis.incrBy(redisKey, value);
+        } catch (Exception ex) {
+            log.warn("occurs exception", ex);
+            throw ex;
+        } finally {
+            close(jedis);
+        }
+
+    }
+
+    /**
+     * 由Redis保证的原子减操作
+     */
+    public static long minus(String key, long value) throws Exception {
+        //'Preconditions.checkArgument(StringUtils.isNotBlank(key), "key can not be null");
+
+        if (value < 0) {
+            return plus(key, Math.abs(value));
+        }
+
+        Jedis jedis = getJedis();
+        try {
+            String redisKey = makeKey(key);
+            return jedis.decrBy(redisKey, value);
+        } catch (Exception ex) {
+            log.warn("occurs exception", ex);
+            throw ex;
+        } finally {
+            close(jedis);
+        }
+    }
+
+    public static long minusOne(String key) throws Exception {
+        return minus(key, 1);
+    }
+
+    public static String makeKey(String key) {
+        return REDIS_KEY + key;
+    }
+
+    public static long plusOne(String key) throws Exception {
+        return plus(key, 1);
+    }
+
+    public static String getStr(String key) throws Exception {
+        if (StringUtils.isEmpty(key)) {
+            return null;
+        }
+
+        Jedis jedis = getJedis();
+        try {
+            String redisKey = makeKey(key);
+            return jedis.get(redisKey);
+        } catch (Exception ex) {
+            log.warn("occurs exception", ex);
+            throw ex;
+        } finally {
+            close(jedis);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
     /**
      * 获取指定key的值,如果key不存在返回null，如果该Key存储的不是字符串，会抛出一个错误
      *
@@ -76,7 +237,7 @@ public class RedisUtil {
      * @param value
      * @return
      */
-    public String set(String key, String value) {
+    public static String set(String key, String value) {
         Jedis jedis = getJedis();
         return jedis.set(key, value);
     }
@@ -933,13 +1094,13 @@ public class RedisUtil {
     }
 
 
-    private void close(Jedis jedis) {
+    private static void close(Jedis jedis) {
         if (jedis != null) {
             jedis.close();
         }
     }
 
-    private Jedis getJedis() {
+    private static Jedis getJedis() {
         return pool.getResource();
     }
 

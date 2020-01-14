@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb35b3aa-db05-413d-bd7a-816839bb8234" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Common/SysConfigUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/JsonTest/FollowFriendMqRespDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/JsonTest/fastjson-1.2.61.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/JsonTest/test.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/RedisTest/RedisTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/RedisTest/RedisUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/RedisTest/RedisTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RedisTest/RedisTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/RedisTest/RedisUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RedisTest/RedisUtil.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,18 +90,34 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1578883823401</updated>
-      <workItem from="1578883825322" duration="4266000" />
+      <workItem from="1578883825322" duration="7267000" />
     </task>
+    <task id="LOCAL-00001" summary="init">
+      <created>1578895831368</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1578895831368</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="init" />
+    <option name="LAST_COMMIT_MESSAGE" value="init" />
   </component>
   <component name="WindowStateProjectService">
     <state x="240" y="67" key="#Project_Structure" timestamp="1578884773064">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="240" y="67" key="#Project_Structure/0.0.1280.800@0.0.1280.800" timestamp="1578884773064" />
+    <state x="232" y="5" key="CommitChangelistDialog2" timestamp="1578895831151">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="232" y="5" key="CommitChangelistDialog2/0.0.1280.800@0.0.1280.800" timestamp="1578895831151" />
     <state x="178" y="63" key="Maven.ArtifactSearchDialog" timestamp="1578885920596">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
@@ -115,5 +126,9 @@
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="149" y="39" key="SettingsEditor/0.0.1280.800@0.0.1280.800" timestamp="1578884680909" />
+    <state x="303" y="169" width="673" height="462" key="find.popup" timestamp="1578969039479">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="303" y="169" width="673" height="462" key="find.popup/0.0.1280.800@0.0.1280.800" timestamp="1578969039479" />
   </component>
 </project>
