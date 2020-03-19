@@ -10,8 +10,6 @@ spring:
 
   application:
     name: test
-  profiles:
-    active: @spring.profiles.active@
   datasource:
     url: jdbc:mysql://cxxm-db.dev.test.jiedaibao.com:3307/taxplan?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull
     username: rd_rw
@@ -46,18 +44,10 @@ spring:
     password:
 
 
-mybatis:
-  mapper-locations: classpath:mybatis/mapper/*.xml
-  type-aliases-package:
-  configuration:
-    cache-enabled: false
-    default-executor-type: REUSE
-    map-underscore-to-camel-case: true
-
 logging:
-  config: classpath:logback/logback-@spring.profiles.active@.xml
+  config: classpath:logback/logback.xml
   level:
-    ROOT: INFO
+    ROOT: debug
   path: /data/logs/test
 
 application:

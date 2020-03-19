@@ -1,4 +1,4 @@
-package RedisTest;
+package com.test.program.example.RedisTest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -207,9 +207,6 @@ public class RedisUtil {
             close(jedis);
         }
     }
-
-
-
 
 
 

@@ -1,4 +1,4 @@
-package JsonTest;
+package com.test.program.example.JsonTest;
 
 import java.io.Serializable;
 import java.util.List;
