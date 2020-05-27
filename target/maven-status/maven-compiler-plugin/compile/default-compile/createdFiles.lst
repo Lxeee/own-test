@@ -1,0 +1,7 @@
+com/test/program/example/JsonTest/test.class
+com/test/program/example/JsonTest/FollowFriendMqRespDTO.class
+com/test/program/Application.class
+com/test/program/example/RedisTest/RedisUtil.class
+com/test/program/example/RedisTest/RedisTest.class
+com/test/program/example/Common/SysConfigUtil.class
+com/test/program/example/JsonTest/FollowFriendMqRespDTO$FollowSuccBean.class
