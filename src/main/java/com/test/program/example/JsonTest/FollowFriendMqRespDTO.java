@@ -4,11 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 好友系统接收mq格式
- *
- * @author Lixyb
- * @version 1.0
- * @date 2019-12-10
  */
 
 public class FollowFriendMqRespDTO implements Serializable {

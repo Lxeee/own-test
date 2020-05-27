@@ -8,9 +8,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 /**
  * Spring Boot
  *
- * @author Youngs
- * @version 1.0
- * @date 2019-12-20
  */
 @SpringBootApplication
 @EnableTransactionManagement

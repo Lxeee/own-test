@@ -3,11 +3,6 @@ package com.test.program.example.BeanutilTest;
 import lombok.Data;
 
 /**
- * 获取平台配置信息详情
- *
- * @author lixyb
- * @version 1.0
- * @date 2020-02-03
  */
 @Data
 public class PlatformConfigDTO {
