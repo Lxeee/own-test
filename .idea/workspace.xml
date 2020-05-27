@@ -291,10 +291,10 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="510" y="456" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1582619487047" />
-    <state x="305" y="7" key="CommitChangelistDialog2" timestamp="1584589251782">
+    <state x="305" y="7" key="CommitChangelistDialog2" timestamp="1590559736666">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="305" y="7" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1584589251782" />
+    <state x="305" y="7" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1590559736666" />
     <state width="462" height="466" key="DebuggerActiveHint" timestamp="1587487643511">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
@@ -348,6 +348,14 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="234" y="83" key="Maven.ArtifactSearchDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1584002869612" />
+    <state x="168" y="94" key="MergeDialog" timestamp="1590559726528">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="168" y="94" key="MergeDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1590559726528" />
+    <state x="553" y="249" key="MultipleFileMergeDialog" timestamp="1590559726576">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="553" y="249" key="MultipleFileMergeDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1590559726576" />
     <state x="196" y="51" key="SettingsEditor" timestamp="1582624532594">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
